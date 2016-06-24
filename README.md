@@ -14,7 +14,7 @@ Génére un fichier de la corolle à la rotation voulue, suivant le fichier init
 
 :warning: si `-o` est spécifié, alors `-r` doit l'être aussi.
 
-:info: si `-r` n'est pas spécifié, alors il générera les 3 rotation complémentaire au fichier
+:warning: si `-r` n'est pas spécifié, alors il générera les 3 rotation complémentaire au fichier
 
 Le fichier de sortie est généré dans le même répertoire que le fichier d'entré
 
