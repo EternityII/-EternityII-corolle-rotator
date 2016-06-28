@@ -21,7 +21,7 @@ def main():
         parser.print_help()
         sys.exit(0)
     if args.rotation is not None:
-        do_rotation(args.file_path[0], args.output[0], args.rotation[0])
+        do_rotation(args.file_path[0], None, args.rotation[0])
     else:
         for i in xrange(4):
             print i
@@ -43,9 +43,9 @@ def do_rotation(file_in_path, file_out_path, rotation):
     data = data.split()
     del data[0]
 
-    ori_rotation = int(data[2])
-    hamming = int(data[5])
-    nb_pieces = int(data[6])
+    ori_rotation = int(data[1])
+    hamming = int(data[6])
+    nb_pieces = int(data[7])
 
     if ori_rotation == rotation:
         file_in.close()
@@ -53,12 +53,12 @@ def do_rotation(file_in_path, file_out_path, rotation):
     rotation = (4 + (rotation - ori_rotation)) % 4
 
     if file_out_path is None:
-        file_out_path = dirname + "/N(" + str(data[0]) + ")_P(" + data[1] + ":" + str(rotation) + ")_Z(" + \
-                        data[3] + "," + data[4] + ")_H(" + data[5] + ").txt"
+        file_out_path = dirname + "/N(" + str(data[0]) + ")_C(" + str(rotation) + ")_P(" + data[2] + ":" + str(
+            (int(data[3]) + rotation) % 4) + ")_Z(" + data[4] + "," + data[5] + ")_H(" + data[6] + ").txt"
 
     file_out = open(file_out_path, "w+")
 
-    data[2] = str(rotation)
+    data[1] = str(rotation)
     new_data = "# " + " ".join(data) + "\n"
 
     file_out.write(data_organisation)
