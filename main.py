@@ -8,7 +8,7 @@ import sys
 def main():
     parser = argparse.ArgumentParser(description="The eternity corolle rotator")
 
-    parser.add_argument("file_path", metavar="input-file", type=str, nargs=1, help="The file path")
+    parser.add_argument("files_path", metavar="input-file", type=str, nargs='+', help="The file path")
     parser.add_argument("-o", "--output", metavar="output-file", type=str, nargs=1,
                         help="Output file path")
     parser.add_argument("-r", "--rotation", metavar="rotation", choices=[0, 1, 2, 3], type=int,
@@ -20,12 +20,13 @@ def main():
     if args.output is not None and args.rotation is None:
         parser.print_help()
         sys.exit(0)
-    if args.rotation is not None:
-        do_rotation(args.file_path[0], None, args.rotation[0])
-    else:
-        for i in xrange(4):
-            print i
-            do_rotation(args.file_path[0], args.output, i)
+    for file_path in args.files_path:
+        if args.rotation is not None:
+            do_rotation(file_path, args.output, args.rotation[0])
+        else:
+            for i in xrange(4):
+                print i
+                do_rotation(file_path, None, i)
 
 
 def do_rotation(file_in_path, file_out_path, rotation):
