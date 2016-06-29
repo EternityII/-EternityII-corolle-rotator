@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import argparse
-import getopt
 import os
 import sys
 
